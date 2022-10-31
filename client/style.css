@@ -1,0 +1,28 @@
+.Main{
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Card{
+    margin: 0 auto;
+}
+
+#LEFT{
+    width: 80%;
+}
+
+#RIGHT{
+/*    width: 200px;*/
+    margin: 5px;
+}
+
+#CREATE_MAP_FILE{
+    margin: 5px;
+}
+
+canvas{
+    width: 100%;
+    height: 100%;
+}
