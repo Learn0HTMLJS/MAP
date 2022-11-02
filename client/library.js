@@ -5,6 +5,8 @@ let ground;
 let ModelAdding = false;
 let countMod = 0;
 let ModelLable = document.getElementById('Model');
+let SelectedModel = null;
+let ModelMooving = false;
 
 var canvas = document.getElementById("renderCanvas");
 var engine = null;

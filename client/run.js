@@ -22,23 +22,56 @@ function createScene() {
   //  let ground = AddGround(GroundWidtch, GroundHeight);
   assetsManager = new BABYLON.AssetsManager(scene);
   // Добавление модели
-  const pointerDown = (vect) => {
-    if(ModelAdding)
-    {
+  const pointerDown_ModelAdding = (vect) => {
+    if (ModelAdding) {
       AddModel(vect);
       AddModelCancel();
     }
   }
+  //  Взаимодействие с моделью  
+  const pointerDown_ModelSelect = (mesh, vect) => {
+    if (SelectedModel == null) {
+      if (mesh == ground)
+        return;
+      SelectedModel = mesh;
+      ModelMooving = true;
+      var mat = new BABYLON.StandardMaterial("blue", scene);
+      mat.diffuseColor = new BABYLON.Color3.Blue();
+      SelectedModel.material = mat;
+    }
+    else
+    {
+      var mat2 = new BABYLON.StandardMaterial("gray", scene);
+      mat2.diffuseColor = new BABYLON.Color3.Gray();
+      SelectedModel.material = mat2;
+      ModelMove(vect);
+      ModelMoveEnd();
+    }
+  }
+
+  const pointerDown_ModelMoove = (vect) => {}
 
   scene.onPointerObservable.add((pointerInfo) => {
     switch (pointerInfo.type) {
       case BABYLON.PointerEventTypes.POINTERDOWN:
         if (pointerInfo.pickInfo.hit) {
-          pointerDown(pointerInfo.pickInfo.pickedPoint)
+          if (ModelAdding)
+            pointerDown_ModelAdding(pointerInfo.pickInfo.pickedPoint)
+          else
+            pointerDown_ModelSelect(pointerInfo.pickInfo.pickedMesh, 
+            pointerInfo.pickInfo.pickedPoint);
         }
         break;
+      /*      case BABYLON.PointerEventTypes.POINTERMOVE:
+              if (pointerInfo.pickInfo.hit) {
+                if(!ModelAdding && ModelMooving)
+                  pointerDown_ModelMoove(pointerInfo.pickInfo.pickedPoint);
+              }
+              break;*/
     }
   });
+
+
 
   return scene;
 };
