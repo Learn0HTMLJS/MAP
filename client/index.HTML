@@ -28,26 +28,34 @@
             <input type="file" class="form-file-input" id="Model" required>
             <label class="form-file-label" for="customFile"> Файл модели </label>
             <button id="ADD_MODEL">Добавить модель</button>
-            <div style="margin-top: 5px;">
+            <div class="CoordBorder">
+                <label for="width" class="form-label">Ширина</label>
+                <input type="number" class="form-control" id="width" placeholder="20" required>
+                <label for="height" class="form-label">Длина</label>
+                <input type="number" class="form-control" id="height" placeholder="10" required>
                 <button id="ADD_SCENE">Добавить сцену</button>
-                <div>
-                    <label for="width" class="form-label">Ширина</label>
-                    <input type="number" class="form-control" id="width" placeholder="20" required>
-                </div>
-                <div>
-                    <label for="height" class="form-label">Длина</label>
-                    <input type="number" class="form-control" id="height" placeholder="10" required>
-                </div>
-                <script>  
+                <script>
                     document.getElementById('width').value = 20;
                     document.getElementById('height').value = 10;
                 </script>
             </div>
-            <div id="MOVING_PANEL">
-                <div class="MOVING_PANEL"><button class="MOVING_PANEL">Top</button></div>
-                <div class="MOVING_PANEL"><button>Left</button>
-                <button>Right</button></div>
-                <div class="MOVING_PANEL"><button class="MOVING_PANEL">Bottomn</Button></button></div>
+            <div class="CoordBorder">
+                <label for="Xpos" class="form-label">X</label>
+                <input type="number" class="form-control" id="Xpos" required>
+                <label for="Ypos" class="form-label">Y</label>
+                <input type="number" class="form-control" id="Ypos" required>
+                <label for="Zpos" class="form-label">Z</label>
+                <input type="number" class="form-control" id="Zpos" required>
+                <button id="SET_COORDINATE">Поставить</button>
+            </div>
+            <div class="CoordBorder">
+                <label for="Xrot" class="form-label">Вращение по X</label>
+                <input type="number" class="form-control" id="Xrot" required>
+                <label for="Yrot" class="form-label">Вращение по Y</label>
+                <input type="number" class="form-control" id="Yrot" required>
+                <label for="Zrot" class="form-label">Вращение по Z</label>
+                <input type="number" class="form-control" id="Zrot" required>
+                <button id="SET_ROTATION">Вращать</button>
             </div>
             <button id="CREATE_MAP_FILE">Создать файл</button>
         </div>

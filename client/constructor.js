@@ -4,6 +4,10 @@ let Add_model_button = document.getElementById('ADD_MODEL');
 Add_model_button.addEventListener('click', ADD_MODEL_Click);
 let Create_file_button = document.getElementById('CREATE_MAP_FILE');
 Create_file_button.addEventListener('click', Create_file_button_Click);
+let SET_COORDINATE_button = document.getElementById('SET_COORDINATE');
+SET_COORDINATE_button.addEventListener('click', SET_COORDINATE_button_Click);
+document.getElementsByTagName('body')[0].onkeydown = CANCEL_SET_COORDINATE_Keypress;
+let SET_ROTATION_button = document.getElementById('SET_ROTATION');
 //let RenderCanvas = document.getElementById('renderCanvas');
 //RenderCanvas.addEventListener('click', renderCanvas_Click);
 
@@ -26,7 +30,7 @@ function AddGround(width, height) {
 }
 
 function ADD_MODEL_Click() {
-  if(!ModelLable.files[0]['name'])
+  if(!ModelLable.files || !ModelLable.files[0]['name'])
     return;
   ModelAdding = !ModelAdding;
   if (ModelAdding) {
@@ -58,4 +62,21 @@ console.log(formData.get('SceneWidtch'));
     console.log(res);
   })
   .catch((err) => console.log(err));
+}
+
+function SET_COORDINATE_button_Click()
+{
+  if(SelectedModel != null)
+  {
+    SelectedModel.position.x = CurrentXpos.value;
+    SelectedModel.position.z = CurrentYpos.value;
+    SelectedModel.position.y = CurrentZpos.value;
+    ModelMoveEnd();
+  }
+}
+
+function CANCEL_SET_COORDINATE_Keypress(e)
+{
+  if(SelectedModel != null && e.key == 'Escape')
+    ModelMoveEnd();
 }

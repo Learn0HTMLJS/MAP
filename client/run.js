@@ -33,17 +33,15 @@ function createScene() {
     if (SelectedModel == null) {
       if (mesh == ground)
         return;
-      SelectedModel = mesh;
-      ModelMooving = true;
-      var mat = new BABYLON.StandardMaterial("blue", scene);
-      mat.diffuseColor = new BABYLON.Color3.Blue();
-      SelectedModel.material = mat;
+      SelectModel(mesh, vect);
     }
     else
     {
-      var mat2 = new BABYLON.StandardMaterial("gray", scene);
-      mat2.diffuseColor = new BABYLON.Color3.Gray();
-      SelectedModel.material = mat2;
+      if(mesh == SelectedModel)
+      {
+        ModelMoveEnd();
+        return;
+      }
       ModelMove(vect);
       ModelMoveEnd();
     }
