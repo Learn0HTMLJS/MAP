@@ -39,15 +39,13 @@ function createScene() {
     {
       if(mesh == SelectedModel)
       {
-        ModelMoveEnd();
+        ModelManipulationEnd();
         return;
       }
       ModelMove(vect);
-      ModelMoveEnd();
+      ModelManipulationEnd();
     }
   }
-
-  const pointerDown_ModelMoove = (vect) => {}
 
   scene.onPointerObservable.add((pointerInfo) => {
     switch (pointerInfo.type) {
@@ -60,16 +58,8 @@ function createScene() {
             pointerInfo.pickInfo.pickedPoint);
         }
         break;
-      /*      case BABYLON.PointerEventTypes.POINTERMOVE:
-              if (pointerInfo.pickInfo.hit) {
-                if(!ModelAdding && ModelMooving)
-                  pointerDown_ModelMoove(pointerInfo.pickInfo.pickedPoint);
-              }
-              break;*/
     }
   });
-
-
 
   return scene;
 };

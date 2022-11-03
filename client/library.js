@@ -10,6 +10,9 @@ let ModelMooving = false;
 let CurrentXpos = document.getElementById('Xpos');
 let CurrentYpos = document.getElementById('Ypos');
 let CurrentZpos = document.getElementById('Zpos');
+let CurrentXrot = document.getElementById('Xrot');
+let CurrentYrot = document.getElementById('Yrot');
+let CurrentZrot = document.getElementById('Zrot');
 
 var canvas = document.getElementById("renderCanvas");
 var engine = null;

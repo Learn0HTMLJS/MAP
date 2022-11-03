@@ -8,6 +8,7 @@ let SET_COORDINATE_button = document.getElementById('SET_COORDINATE');
 SET_COORDINATE_button.addEventListener('click', SET_COORDINATE_button_Click);
 document.getElementsByTagName('body')[0].onkeydown = CANCEL_SET_COORDINATE_Keypress;
 let SET_ROTATION_button = document.getElementById('SET_ROTATION');
+SET_ROTATION_button.addEventListener('click', SET_ROTATION_button_Click);
 //let RenderCanvas = document.getElementById('renderCanvas');
 //RenderCanvas.addEventListener('click', renderCanvas_Click);
 
@@ -71,12 +72,27 @@ function SET_COORDINATE_button_Click()
     SelectedModel.position.x = CurrentXpos.value;
     SelectedModel.position.z = CurrentYpos.value;
     SelectedModel.position.y = CurrentZpos.value;
-    ModelMoveEnd();
+    ModelManipulationEnd();
+  }
+}
+
+function SET_ROTATION_button_Click()
+{
+  if(SelectedModel != null)
+  {
+SelectedModel.rotation = new BABYLON.Vector3(
+  Math.PI / 180 * CurrentXrot.value, 
+  Math.PI / 180 * CurrentZrot.value, 
+  Math.PI / 180 * CurrentYrot.value);
+/*    SelectedModel.rotation.x = CurrentXrot.value;
+    SelectedModel.rotation.z = CurrentYrot.value;
+    SelectedModel.rotation.y = CurrentZrot.value;*/
+    ModelManipulationEnd();
   }
 }
 
 function CANCEL_SET_COORDINATE_Keypress(e)
 {
   if(SelectedModel != null && e.key == 'Escape')
-    ModelMoveEnd();
+    ModelManipulationEnd();
 }

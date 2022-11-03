@@ -39,6 +39,9 @@ function SelectModel(mesh, vect)
   CurrentXpos.value = SelectedModel.position.x;
   CurrentYpos.value = SelectedModel.position.z;
   CurrentZpos.value = SelectedModel.position.y;
+  CurrentXrot.value = 180 / Math.PI * SelectedModel.rotation.x;
+  CurrentYrot.value = 180 / Math.PI * SelectedModel.rotation.z;
+  CurrentZrot.value = 180 / Math.PI * SelectedModel.rotation.y;
 }
 
 function ModelMove(vect)
@@ -51,7 +54,7 @@ function ModelMove(vect)
   CurrentZpos.value = vect.y;
 }
 
-function ModelMoveEnd()
+function ModelManipulationEnd()
 {
   var mat2 = new BABYLON.StandardMaterial("gray", scene);
   mat2.diffuseColor = new BABYLON.Color3.Gray();
@@ -61,4 +64,7 @@ function ModelMoveEnd()
   CurrentXpos.value = 0;
   CurrentYpos.value = 0;
   CurrentZpos.value = 0;
+  CurrentXrot.value = 0;
+  CurrentYrot.value = 0;
+  CurrentZrot.value = 0;
 }
