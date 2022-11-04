@@ -1,18 +1,13 @@
 function AddModel(vector)
 {
-//console.log(ModelLable.files[0]['name']);
   var meshTask = assetsManager.addMeshTask("obj task", "", "../models/", ModelLable.files[0]['name']);
   meshTask.onSuccess = function (task) {
     task.loadedMeshes[countMod].position = vector;
-//    task.loadedMeshes[ModelsArray.length - 1].position = vector;
-console.log(ModelsArray);
-
     var t = {
-      ModelName: 'Model3.gtlf',
-      Number: countMod,
-      Position:  vector
+      ModelName: ModelLable.files[0]['name'],
+      ModelMesh:  task.loadedMeshes[countMod]
     }
-    ModelsArray.Push(t);
+    ModelsArray[countMod] = t;
     
     countMod++;
   }
@@ -20,7 +15,22 @@ console.log(ModelsArray);
     engine.runRenderLoop(function () { scene.render(); });
   }
   assetsManager.load();
-//  BABYLON.SceneLoader.Append("../models/", "Model3.gltf", scene, function(scene){});
+}
+
+function GetModelsList()
+{
+  let res = [];
+  for(let i = 0; i < countMod; i++)
+  {
+    var t = {
+      ModelName: ModelsArray[i]['ModelName'],
+      Number: i,
+      Position: ModelsArray[i]['ModelMesh'].position,
+      Rotation: ModelsArray[i]['ModelMesh'].rotation 
+    }
+    res[i] = t;
+  } 
+  return res;
 }
 
 function AddModelCancel()

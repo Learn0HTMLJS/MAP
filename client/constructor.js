@@ -9,6 +9,8 @@ SET_COORDINATE_button.addEventListener('click', SET_COORDINATE_button_Click);
 document.getElementsByTagName('body')[0].onkeydown = CANCEL_SET_COORDINATE_Keypress;
 let SET_ROTATION_button = document.getElementById('SET_ROTATION');
 SET_ROTATION_button.addEventListener('click', SET_ROTATION_button_Click);
+let GET_FILE_button = document.getElementById('GET_MAP_FILE');
+GET_FILE_button.addEventListener('click', GET_MAP_FILE_button_Click);
 //let RenderCanvas = document.getElementById('renderCanvas');
 //RenderCanvas.addEventListener('click', renderCanvas_Click);
 
@@ -44,17 +46,15 @@ function ADD_MODEL_Click() {
 
 function Create_file_button_Click() {
 //console.log(ModelsArray.length);
-/*  if (ModelsArray == 0 || !ModelsArray){
+  if (ModelsArray == 0 || !ModelsArray){
     console.log('!!!!');
     return null;
-  }*/
+  }
   const formData = new FormData();
   formData.append('SceneWidtch', ground._width);
   formData.append('SceneHeight', ground._height);
-
-console.log(formData.get('SceneWidtch'));
-//  formData.append('Models', ModelsArray);
-
+  let array = GetModelsList();
+  formData.append('Models', JSON.stringify(array));
   fetch('http://localhost:3000/api/models', {
     method: 'POST',
     body: formData
@@ -95,4 +95,9 @@ function CANCEL_SET_COORDINATE_Keypress(e)
 {
   if(SelectedModel != null && e.key == 'Escape')
     ModelManipulationEnd();
+}
+
+function GET_MAP_FILE_button_Click()
+{
+  LoadMap(engine, scene, assetsManager);
 }

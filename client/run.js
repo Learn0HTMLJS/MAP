@@ -42,6 +42,8 @@ function createScene() {
         ModelManipulationEnd();
         return;
       }
+      if(mesh != ground)
+        return;
       ModelMove(vect);
       ModelManipulationEnd();
     }

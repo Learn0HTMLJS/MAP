@@ -11,9 +11,10 @@ app.use(bodyParser.json());
 app.use('/', express.static('client'));
 app.use('/BABYLON', express.static('BABYLON'));
 app.use('/models', express.static('models'));
+app.use('/export', express.static('export'));
 
-//const models = require('./small_router');
-//app.use('/api/models', models);
+const models = require('./small_router');
+app.use('/api/models', models);
 
 /*const fileFilter = (req, file, cb) => {
     if (file.mimetype === "stl") {

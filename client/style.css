@@ -50,3 +50,8 @@ canvas{
 #SET_ROTATION{
     margin-top: 5px;    
 }
+
+#GET_MAP_FILE{
+    margin-top: 5px;
+    margin-left: 10px;    
+}
