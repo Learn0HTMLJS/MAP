@@ -1,9 +1,3 @@
-/*var canvas = document.getElementById("renderCanvas");
-var engine = null;
-var scene = null;
-var sceneToRender = null;
-var assetsManager;*/
-
 async function GetMapFile() {
     let Map;
     await fetch('http://localhost:3000/api/models', {
@@ -18,9 +12,9 @@ async function GetMapFile() {
         .catch((err) => { console.log(err); return false });
 }
 
-function LoadMap(engine, scene, assetsManager) {
+async function LoadMap(engine, scene, assetsManager, ModelsCollection) {
     let MapFile;
-
+    ModelsCollection = [];
     fetch('http://localhost:3000/api/models', {
         method: 'GET'
     })
@@ -38,19 +32,27 @@ function LoadMap(engine, scene, assetsManager) {
         let array = MapFile['Models'];
         array = JSON.parse(array);
         for (let i = 0; i < array.length; i++) {
-            var meshTask = assetsManager.addMeshTask("obj task", "", "../models/", array[i]['ModelName']);
+            var meshTask = assetsManager.addMeshTask("obj task", "", "/models/", array[i]['ModelName']);
             meshTask.onSuccess = function (task) {
-console.log(array[i]);
-                task.loadedMeshes[i].position.x = array[i]['Position']['_x'];
-                task.loadedMeshes[i].position.y = array[i]['Position']['_y'];
-                task.loadedMeshes[i].position.z = array[i]['Position']['_z'];
-                task.loadedMeshes[i].rotation = array[i]['Rotation'];
+              console.log(assetsManager);
+                task.loadedMeshes[i].position = array[i]['Position'];
+                task.loadedMeshes[i].rotation = new BABYLON.Vector3( 
+                    array[i]['Rotation']['_x'],
+                    array[i]['Rotation']['_y'],
+                    array[i]['Rotation']['_z'],
+                );
+                var t = {
+                    ModelName: array[i]['ModelName'],
+                    ModelMesh:  task.loadedMeshes[i]
+                }
+                ModelsCollection[i] = t;
             }
             assetsManager.onFinish = function (tasks) {
                 engine.runRenderLoop(function () { scene.render(); });
-            }
-            assetsManager.load();
+            }            
         }
+        assetsManager.load();
+        console.log(ModelsCollection);
     })
     .catch((err) => { console.log(err); return false });
 }

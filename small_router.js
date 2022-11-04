@@ -31,7 +31,7 @@ router.route('/')
         try {           
             fs.readFile("./export/map.json", "utf8", 
             function(error,data){
-                console.log("Асинхронное чтение файла");
+//                console.log("Асинхронное чтение файла");
                 if(error) 
                 {
                     res.status(400).send('Такого файла нет');

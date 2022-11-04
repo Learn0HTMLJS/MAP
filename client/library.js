@@ -20,5 +20,5 @@ var scene = null;
 var sceneToRender = null;
 var assetsManager;
 
-var ModelsArray = [];
+let ModelsArray = [];
 //****************************************************
